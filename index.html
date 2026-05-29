@@ -94,7 +94,7 @@
             color: var(--pink-pastel);
             opacity: 0.6;
             filter: drop-shadow(var(--neon-glow));
-            animation: rise up linear infinite;
+            animation: rise 5s linear infinite;
         }
 
         @keyframes rise {
@@ -133,6 +133,9 @@
         .loader-content {
             text-align: center;
             max-width: 80%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         .loader-title {
             font-family: 'Dancing Script', cursive;
@@ -212,6 +215,9 @@
             transition: all 0.4s ease;
         }
         .nav-logo {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
             font-family: 'Dancing Script', cursive;
             font-size: 1.8rem;
             background: linear-gradient(to right, var(--pink-pastel), var(--purple-soft));
@@ -225,6 +231,7 @@
             list-style: none;
             gap: 15px;
             max-height: 400px;
+            margin-left: auto; 
         }
         .nav-link {
             color: rgba(255,255,255,0.7);
@@ -249,6 +256,7 @@
             color: #fff;
             font-size: 1.3rem;
             cursor: pointer;
+            margin-left: auto;
         }
 
         /* Spotify-style Mini Player */
@@ -384,7 +392,7 @@
             margin-bottom: 50px;
         }
 
-        /* 2. Hero Section */
+        /* Hero Section */
         #home {
             padding-top: 150px;
             text-align: center;
@@ -488,7 +496,7 @@
             transform: translateY(-3px);
         }
 
-        /* 4. Tentang Yumna */
+        /* Tentang Yumna */
         .about-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -523,7 +531,7 @@
             color: var(--peach-soft);
         }
 
-        /* 5. Love Story Timeline */
+        /* Love Story Timeline */
         .timeline-container {
             position: relative;
             max-width: 800px;
@@ -580,7 +588,7 @@
             line-height: 1.5;
         }
 
-        /* 6. Tanggal Jadian Counter & Countdown */
+        /* Hitung Bersama & Countdown */
         .counter-section-wrapper {
             display: flex;
             flex-direction: column;
@@ -623,7 +631,7 @@
             font-style: italic;
         }
 
-        /* 8. Galeri Kenangan & Video */
+        /* Galeri Kenangan & Video */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
@@ -753,7 +761,7 @@
         }
         .lightbox-close:hover { transform: scale(1.1); }
 
-        /* 9. Surat Cinta Digital */
+        /* Surat Cinta Digital */
         .love-letter-container {
             max-width: 750px;
             margin: 0 auto;
@@ -777,7 +785,7 @@
             line-height: 1;
         }
 
-        /* 10. Quotes Carousel */
+        /* Quotes Carousel */
         .quotes-carousel {
             max-width: 700px;
             margin: 0 auto;
@@ -797,7 +805,7 @@
         .quote-slide.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* 11. Alasan Aku Sayang Yumna (Flip Cards) */
+        /* Flip Cards */
         .reasons-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -851,7 +859,7 @@
             line-height: 1.5;
         }
 
-        /* 12. Playlist Kita */
+        /* Playlist Kita Baru */
         .playlist-wrapper {
             max-width: 600px;
             margin: 0 auto;
@@ -863,15 +871,31 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 14px 20px;
-            border-radius: 14px;
+            padding: 12px 18px;
+            border-radius: 16px;
             background: rgba(255,255,255,0.02);
             border: 1px solid var(--glass-border);
-            transition: background 0.2s;
+            transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
             cursor: pointer;
+            position: relative;
+            overflow: hidden;
         }
         .playlist-item:hover {
-            background: rgba(255,255,255,0.07);
+            background: rgba(255,255,255,0.08);
+            transform: translateX(5px);
+        }
+        .playlist-item.active {
+            background: rgba(255, 65, 129, 0.15);
+            border-color: var(--pink-pastel);
+            box-shadow: 0 0 15px rgba(255, 65, 129, 0.2);
+        }
+        .playlist-item.active::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0; bottom: 0;
+            width: 4px;
+            background: var(--neon-pink);
+            border-radius: 4px 0 0 4px;
         }
         .track-left {
             display: flex;
@@ -882,22 +906,77 @@
             font-size: 0.85rem;
             color: rgba(255,255,255,0.4);
             width: 20px;
+            text-align: center;
+            font-weight: 600;
+        }
+        .track-thumb {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            background: linear-gradient(45deg, var(--black-card), rgba(255,183,197,0.2));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--pink-pastel);
+            font-size: 1rem;
+            border: 1px solid var(--glass-border);
+            transition: all 0.3s ease;
+        }
+        .playlist-item.active .track-thumb {
+            background: linear-gradient(45deg, var(--rose-gold), var(--purple-soft));
+            color: #fff;
+            animation: pulseRecord 4s linear infinite;
         }
         .track-meta h4 {
             font-size: 0.95rem;
             color: #fff;
             margin-bottom: 2px;
+            transition: color 0.3s;
+        }
+        .playlist-item.active .track-meta h4 {
+            color: var(--pink-pastel);
         }
         .track-meta p {
             font-size: 0.8rem;
             color: rgba(255,255,255,0.5);
         }
+        .track-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
         .track-duration {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: rgba(255,255,255,0.4);
         }
+        .play-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.75rem;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.3s ease;
+        }
+        .playlist-item:hover .play-icon {
+            opacity: 1;
+            transform: scale(1);
+            background: rgba(255,255,255,0.2);
+        }
+        .playlist-item.active .play-icon {
+            opacity: 1;
+            transform: scale(1);
+            background: var(--pink-pastel);
+            color: var(--black-dark);
+            box-shadow: 0 0 10px var(--neon-pink);
+        }
 
-        /* 13. Message Wall */
+        /* Message Wall */
         .wall-container {
             max-width: 650px;
             margin: 0 auto;
@@ -931,7 +1010,7 @@
             box-shadow: 0 5px 15px rgba(255, 65, 129, 0.1);
         }
 
-        /* 14. Secret Message */
+        /* Secret Message Popup */
         .secret-trigger-zone {
             text-align: center;
             margin-top: 20px;
@@ -946,7 +1025,6 @@
             100% { box-shadow: 0 0 0 0 rgba(255, 65, 129, 0); }
         }
         
-        /* Popup Window */
         #secret-popup {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -982,7 +1060,7 @@
             font-weight: 500;
         }
 
-        /* 15. Penutup Cinematic */
+        /* Penutup Cinematic */
         #penutup {
             position: relative;
             text-align: center;
@@ -1011,7 +1089,7 @@
             margin-bottom: 20px;
         }
 
-        /* Responsive Mobile Customization */
+        /* Responsive Mobile Layout */
         @media (max-width: 1024px) {
             .nav-menu {
                 position: absolute;
@@ -1046,6 +1124,188 @@
             .closing-title { font-size: 2.3rem; }
             .spotify-player { width: calc(100% - 30px); left: 15px; bottom: 15px; }
         }
+
+        /* --- PERBAIKAN DAN PENYESUAIAN TOTAL TEMA PUTIH / TERANG --- */
+        .theme-btn {
+            background: none;
+            border: none;
+            color: var(--pink-pastel);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: transform 0.3s;
+            outline: none;
+        }
+        .theme-btn:hover {
+            transform: scale(1.15);
+        }
+        
+        body.light-theme {
+            --black-dark: #ffffff;
+            --black-card: rgba(255, 255, 255, 0.85);
+            --glass-border: rgba(219, 112, 147, 0.25);
+            background: linear-gradient(135deg, #fff0f5 0%, #ffe4e1 40%, #fffafa 70%, #ffb7c5 100%);
+            color: #2d1a29;
+        }
+        body.light-theme .ambient-light { display: none; }
+        
+        body.light-theme .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            box-shadow: 0 15px 35px rgba(255, 183, 197, 0.2), inset 0 1px 2px rgba(255,255,255,0.8);
+            border: 1px solid rgba(219, 112, 147, 0.2);
+        }
+        body.light-theme .glass-card:hover {
+            border-color: rgba(219, 112, 147, 0.4);
+            box-shadow: 0 25px 50px rgba(219, 112, 147, 0.25);
+        }
+        
+        body.light-theme .navbar-container {
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 10px 30px rgba(255, 183, 197, 0.25);
+            border: 1px solid rgba(219, 112, 147, 0.15);
+        }
+        body.light-theme .nav-logo {
+            background: linear-gradient(to right, #b76e79, #8a4f7d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        body.light-theme .nav-link { color: #5c4355; }
+        body.light-theme .nav-link:hover, body.light-theme .nav-link.active { 
+            color: #fff; 
+            background: rgba(219, 112, 147, 0.4);
+            text-shadow: none;
+        }
+        body.light-theme .nav-toggle { color: #2d1a29; }
+        
+        /* Overriding Gradasi Judul & Sub-judul Agar Sangat Kontras */
+        body.light-theme .section-title {
+            background: linear-gradient(135deg, #b76e79, #2d1a29);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: none;
+        }
+        body.light-theme .section-subtitle {
+            color: #8a4f7d;
+        }
+        body.light-theme .hero-title {
+            background: linear-gradient(to right, #2d1a29, #b76e79, #2d1a29);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: none;
+        }
+        body.light-theme .hero-subtitle {
+            color: #b76e79;
+            text-shadow: none;
+        }
+        body.light-theme .typing-container { color: #4e3447; }
+        
+        /* Pewarnaan Elemen Kartu */
+        body.light-theme .about-card h3, 
+        body.light-theme .timeline-content h3, 
+        body.light-theme .counter-number, 
+        body.light-theme .track-meta h4, 
+        body.light-theme .popup-message { 
+            color: #2d1a29 !important; text-shadow: none; 
+        }
+        body.light-theme .about-card p, 
+        body.light-theme .timeline-content p, 
+        body.light-theme .counter-statement { 
+            color: #5c4a57 !important; 
+        }
+        body.light-theme .about-icon {
+            color: #b76e79;
+            text-shadow: none;
+        }
+        body.light-theme .about-quote-block {
+            color: #8a4f7d;
+        }
+        body.light-theme .timeline-date {
+            color: #b76e79;
+        }
+        body.light-theme .counter-label {
+            color: #8a4f7d;
+        }
+        body.light-theme .counter-container h3 {
+            color: #b76e79 !important;
+        }
+        
+        /* Surat & Quotes Modern */
+        body.light-theme .letter-paper { color: #3a2534; }
+        body.light-theme .letter-paper::before {
+            color: rgba(219, 112, 147, 0.15);
+        }
+        body.light-theme .quotes-carousel {
+            background: rgba(255, 255, 255, 0.6) !important;
+        }
+        body.light-theme .quote-slide {
+            color: #b76e79;
+        }
+        
+        /* Flip Cards & Playlists */
+        body.light-theme .card-front { 
+            color: #b76e79; 
+            background: rgba(255, 255, 255, 0.9); 
+            border: 1px solid rgba(219, 112, 147, 0.2);
+        }
+        body.light-theme .card-back {
+            background: linear-gradient(135deg, #ffe4e1, #ffb7c5);
+            color: #2d1a29;
+            border: 1px solid rgba(219, 112, 147, 0.2);
+        }
+        body.light-theme .playlist-item {
+            background: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(219, 112, 147, 0.15);
+        }
+        body.light-theme .playlist-item:hover {
+            background: rgba(255, 255, 255, 0.95);
+        }
+        
+        /* Balon Obrolan / Chat Wall */
+        body.light-theme .bubble-left { 
+            background: rgba(255, 255, 255, 0.95); 
+            color: #2d1a29; 
+            border: 1px solid rgba(219, 112, 147, 0.15);
+        }
+        body.light-theme .bubble-right {
+            background: linear-gradient(135deg, #b76e79, #ff5e97);
+            color: #fff;
+        }
+        
+        /* Pemutar Musik */
+        body.light-theme .spotify-player { 
+            background: rgba(255, 255, 255, 0.95); 
+            box-shadow: 0 15px 35px rgba(255, 183, 197, 0.35);
+            border: 1px solid rgba(219, 112, 147, 0.2);
+        }
+        body.light-theme .track-title { color: #2d1a29; }
+        body.light-theme .track-artist { color: #735b6c; }
+        body.light-theme .play-btn { background: #b76e79; color: #fff; }
+        
+        /* Tambahan untuk Light Theme Playlist (Baru) */
+        body.light-theme .playlist-item.active {
+            background: rgba(219, 112, 147, 0.2);
+            border-color: rgba(219, 112, 147, 0.6);
+            box-shadow: 0 5px 15px rgba(219, 112, 147, 0.15);
+        }
+        body.light-theme .playlist-item.active::before {
+            background: #b76e79;
+        }
+        body.light-theme .playlist-item.active .track-meta h4 {
+            color: #8a4f7d !important;
+        }
+        body.light-theme .playlist-item.active .track-thumb {
+            background: linear-gradient(45deg, #b76e79, #8a4f7d);
+        }
+        body.light-theme .track-number { color: #8a4f7d; }
+        body.light-theme .track-duration { color: #735b6c; }
+
+        /* Lain-lain */
+        body.light-theme #loading-screen { background: #fff0f5; }
+        body.light-theme #lightbox { background: rgba(255, 255, 255, 0.95); }
+        body.light-theme .lightbox-close { color: #2d1a29; }
+        body.light-theme .video-audio-toggle { background: rgba(255,255,255,0.8); color: #2d1a29; }
+        body.light-theme .closing-title { color: #2d1a29; text-shadow: 0 0 15px rgba(255, 183, 197, 0.8); }
+        /* --- BATAS TEMA TERANG --- */
+
     </style>
 </head>
 <body>
@@ -1057,16 +1317,23 @@
 
     <div id="loading-screen">
         <div class="loader-content">
-            <div class="loader-title">Loading For You My Everything..</div>
-            <div class="loader-subtitle">Preparing love system</div>
-            <div class="progress-bar-container">
+            <div class="loader-title" id="loader-title">Loading For You My Everything..</div>
+            <div class="loader-subtitle" id="loader-subtitle">Preparing love system</div>
+            <div class="progress-bar-container" id="progress-container">
                 <div class="progress-bar" id="load-progress"></div>
             </div>
+            <button id="start-btn" class="btn-premium btn-primary" style="display: none; margin-top: 30px; animation: fadeInOut 2s infinite alternate;">Buka Halaman Utama ❤️</button>
         </div>
     </div>
 
     <nav class="navbar-container">
-        <a href="#home" class="nav-logo">Yumna❤️</a>
+        <div class="nav-left" style="display: flex; align-items: center; gap: 15px;">
+            <button id="theme-toggle" class="theme-btn" title="Ganti Tema Warna">
+                <i class="fas fa-sun"></i>
+            </button>
+        </div>
+        <a href="#home" class="nav-logo">❤️Yumna❤️</a>
+        
         <button class="nav-toggle" id="nav-btn"><i class="fas fa-bars"></i></button>
         <ul class="nav-menu" id="nav-menu-list">
             <li><a href="#home" class="nav-link active">Home</a></li>
@@ -1356,67 +1623,95 @@ aku sayang banget sama kamu ❤️</div>
     <section id="playlist">
         <h2 class="section-title">Playlists you liked</h2>
         <div class="section-subtitle">Lagu-lagu yang mendefinisikan rasa </div>
-        <div class="playlist-wrapper">
+        <div class="playlist-wrapper" id="playlist-container">
             
-            <div class="playlist-item" onclick="changeTrack('A Year Ago', 'James Arthur', 'Ab.mp3')">
+            <div class="playlist-item" onclick="changeTrack(this, 'A Year Ago', 'James Arthur', 'Ab.mp3')">
                 <div class="track-left">
                     <div class="track-number">1</div>
+                    <div class="track-thumb"><i class="fas fa-music"></i></div>
                     <div class="track-meta">
                         <h4>A Year Ago</h4>
                         <p>James Arthur</p>
                     </div>
                 </div>
-            </div>
-            
-<div class="playlist-item" onclick="changeTrack('Somebody\'s Pleasure', 'Aziz Hendra', 'cb.mp3')">
-    <div class="track-left">
-        <div class="track-number">2</div>
-        <div class="track-meta">
-            <h4>Somebody's Pleasure </h4>
-            <p>Aziz Hendra</p>
-        </div>
-    </div>
-</div> 
-
-
-            
-            <div class="playlist-item" onclick="changeTrack('You & I', 'One Direction', 'gs.mp3')">
-                <div class="track-left">
-                    <div class="track-number">3</div>
-                    <div class="track-meta">
-                        <h4>You & I</h4>
-                        <p>One Direction</p></p>
-                    </div>
+                <div class="track-right">
+                    <div class="track-duration">3:45</div>
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
                 </div>
             </div>
             
-            <div class="playlist-item" onclick="changeTrack('Naked', 'James Arthur', 'oa.mp3')">
+            <div class="playlist-item" onclick="changeTrack(this, 'Somebody\'s Pleasure', 'Aziz Hendra', 'cb.mp3')">
+                <div class="track-left">
+                    <div class="track-number">2</div>
+                    <div class="track-thumb"><i class="fas fa-music"></i></div>
+                    <div class="track-meta">
+                        <h4>Somebody's Pleasure</h4>
+                        <p>Aziz Hendra</p>
+                    </div>
+                </div>
+                <div class="track-right">
+                    <div class="track-duration">4:12</div>
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                </div>
+            </div> 
+
+            <div class="playlist-item" onclick="changeTrack(this, 'You & I', 'One Direction', 'gs.mp3')">
+                <div class="track-left">
+                    <div class="track-number">3</div>
+                    <div class="track-thumb"><i class="fas fa-music"></i></div>
+                    <div class="track-meta">
+                        <h4>You & I</h4>
+                        <p>One Direction</p>
+                    </div>
+                </div>
+                <div class="track-right">
+                    <div class="track-duration">3:58</div>
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                </div>
+            </div>
+            
+            <div class="playlist-item" onclick="changeTrack(this, 'Naked', 'James Arthur', 'oa.mp3')">
                 <div class="track-left">
                     <div class="track-number">4</div>
+                    <div class="track-thumb"><i class="fas fa-music"></i></div>
                     <div class="track-meta">
                         <h4>Naked</h4>
                         <p>James Arthur</p>
                     </div>
                 </div>
+                <div class="track-right">
+                    <div class="track-duration">3:53</div>
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                </div>
             </div>
             
-            <div class="playlist-item" onclick="changeTrack('Impossible', 'James Arthur', 'hh.mp3')">
+            <div class="playlist-item" onclick="changeTrack(this, 'Impossible', 'James Arthur', 'hh.mp3')">
                 <div class="track-left">
                     <div class="track-number">5</div>
+                    <div class="track-thumb"><i class="fas fa-music"></i></div>
                     <div class="track-meta">
                         <h4>Impossible</h4>
                         <p>James Arthur</p>
                     </div>
                 </div>
+                <div class="track-right">
+                    <div class="track-duration">3:29</div>
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                </div>
             </div>
             
-            <div class="playlist-item" onclick="changeTrack('Can I Be Him', 'James Arthur', 'kk.mp3')">
+            <div class="playlist-item" onclick="changeTrack(this, 'Can I Be Him', 'James Arthur', 'kk.mp3')">
                 <div class="track-left">
                     <div class="track-number">6</div>
+                    <div class="track-thumb"><i class="fas fa-music"></i></div>
                     <div class="track-meta">
                         <h4>Can I Be Him</h4>
                         <p>James Arthur</p>
                     </div>
+                </div>
+                <div class="track-right">
+                    <div class="track-duration">4:06</div>
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
                 </div>
             </div>
             
@@ -1454,23 +1749,36 @@ aku sayang banget sama kamu ❤️</div>
     </section>
 
     <script>
-        // 1. Loading Screen Animation
+        // Loading Screen Animation
         window.addEventListener('DOMContentLoaded', () => {
             let progress = 0;
             const progressBar = document.getElementById('load-progress');
+            const progressContainer = document.getElementById('progress-container');
+            const loaderTitle = document.getElementById('loader-title');
+            const loaderSubtitle = document.getElementById('loader-subtitle');
+            const startBtn = document.getElementById('start-btn');
+
             const interval = setInterval(() => {
                 progress += Math.floor(Math.random() * 15) + 5;
                 if(progress >= 100) {
                     progress = 100;
                     clearInterval(interval);
+                    
                     setTimeout(() => {
-                        const loader = document.getElementById('loading-screen');
-                        loader.style.opacity = '0';
-                        setTimeout(() => loader.style.display = 'none', 1000);
-                    }, 400);
+                        progressContainer.style.display = 'none';
+                        loaderTitle.innerText = "Cil!✨";
+                        loaderSubtitle.innerText = "For You My Everything...";
+                        startBtn.style.display = 'inline-block';
+                    }, 500);
                 }
                 progressBar.style.width = progress + '%';
             }, 80);
+
+            startBtn.addEventListener('click', () => {
+                const loader = document.getElementById('loading-screen');
+                loader.style.opacity = '0';
+                setTimeout(() => loader.style.display = 'none', 1000);
+            });
         });
 
         const mouseGlow = document.getElementById('mouse-glow');
@@ -1500,7 +1808,6 @@ aku sayang banget sama kamu ❤️</div>
         const visBars = document.querySelectorAll('.vis-bar');
 
         function toggleAudio() {
-            // Cek apakah ada file lagu yang sudah dipilih
             if (!audio.src || audio.src === window.location.href) {
                 alert("Silakan klik / pilih lagu dari daftar Playlist terlebih dahulu di bagian bawah web ya.");
                 return;
@@ -1538,10 +1845,25 @@ aku sayang banget sama kamu ❤️</div>
             });
         }
         
-        function changeTrack(name, artist, audioSrc) {
+        // Playlist Logic Update
+        function changeTrack(element, name, artist, audioSrc) {
+            // Menghapus kelas 'active' dan reset ikon play dari semua item
+            document.querySelectorAll('.playlist-item').forEach(item => {
+                item.classList.remove('active');
+                item.querySelector('.play-icon i').classList.remove('fa-pause', 'fa-chart-bar');
+                item.querySelector('.play-icon i').classList.add('fa-play');
+            });
+
+            // Menambahkan kelas 'active' ke lagu yang diklik
+            element.classList.add('active');
+            element.querySelector('.play-icon i').classList.remove('fa-play');
+            element.querySelector('.play-icon i').classList.add('fa-chart-bar'); // Ikon visualizer aktif
+
+            // Update info di mini player
             document.getElementById('player-track').innerText = name;
             document.getElementById('player-artist').innerText = artist;
             
+            // Putar lagu
             if (audioSrc) {
                 audio.src = audioSrc;
                 audio.play().then(() => {
@@ -1551,10 +1873,19 @@ aku sayang banget sama kamu ❤️</div>
                 }).catch(err => {
                     console.log(err);
                     alert("Ups! File lagu '" + audioSrc + "' tidak ditemukan. Pastikan kamu sudah menyimpan file MP3 tersebut di folder yang sama ya.");
+                    
+                    // Revert status aktif jika gagal putar
+                    element.classList.remove('active');
+                    element.querySelector('.play-icon i').classList.remove('fa-chart-bar');
+                    element.querySelector('.play-icon i').classList.add('fa-play');
+                    playBtn.innerHTML = '<i class="fas fa-play"></i>';
+                    miniPlayer.classList.remove('playing');
+                    animateVisualizer(false);
                 });
             }
         }
 
+        // Typing Effect
         const words = [
             "Terima kasih sudah hadir di hidupku.",
             "Kamu adalah rumah ternyaman.",
@@ -1586,6 +1917,7 @@ aku sayang banget sama kamu ❤️</div>
         }
         setTimeout(typeEffect, 1500);
 
+        // Date Counter Logic
         const anniversaryDate = new Date("2024-06-22T00:00:00").getTime();
         function updateCounters() {
             const now = new Date().getTime();
@@ -1690,6 +2022,21 @@ aku sayang banget sama kamu ❤️</div>
         }, observerOptions);
 
         sections.forEach(sec => sectionObserver.observe(sec));
+
+        // Theme Toggle Logic
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        themeToggleBtn.addEventListener('click', () => {
+            document.body.classList.toggle('light-theme');
+            const icon = themeToggleBtn.querySelector('i');
+            
+            if(document.body.classList.contains('light-theme')) {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            } else {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            }
+        });
     </script>
 </body>
 </html>
